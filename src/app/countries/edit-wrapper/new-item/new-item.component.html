@@ -1,0 +1,31 @@
+<form [formGroup]="newForm" (ngSubmit)="onNew()">
+  <div class="form-group">
+      <label for="name"><span class="req">*</span>Name:</label>
+      <input type="text" id="name" class="form-control" formControlName="newName">
+  </div>
+  <div class="form-group">
+      <label for="region"><span class="req">*</span>Region:</label>
+      <input type="text" id="region" class="form-control" formControlName="newRegion">
+  </div>
+  <div class="form-group">
+      <label for="nativeName"><span class="req">*</span>Native Name:</label>
+      <input type="text" id="nativeName" class="form-control" formControlName="nativeName">
+  </div>
+  <div class="form-group">
+      <label for="flag">Flag:</label>
+      <input type="text" id="flag" class="form-control" formControlName="flag">
+  </div>
+  <div class="form-group">
+      <label for="email"><span class="req">*</span>Email:</label>
+      <input type="text" id="email" class="form-control" formControlName="email">
+  </div>
+  <div class="form-group">
+      <label for="gender"><span class="req">*</span>Gender: </label>
+      <div *ngFor="let gender of genders">
+              <input type="radio" id="{{gender}}" [value]="gender" formControlName="gender"> {{ gender }}
+      </div>
+  </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-default" (click)="onNew()" [disabled]="newForm.invalid">Save</button>
+  </div>
+</form>

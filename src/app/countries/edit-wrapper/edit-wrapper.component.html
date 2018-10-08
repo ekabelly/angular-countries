@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h1 class="text-center">
+        <p *ngIf="editMode === 'edit'">Editing </p>
+        <p *ngIf="editMode === 'view'">Viewing </p>
+        <p *ngIf="editMode === 'new'">New Country </p>
+      </h1>
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="editMode">
+          <option *ngIf="id + 1" value="edit">Edit</option>
+          <option *ngIf="id + 1" value="view">View</option>
+          <option value="new">New</option>
+        </select>
+      </div>
+      <app-edit-item *ngIf="editMode === 'edit'"></app-edit-item>
+      <app-view-item *ngIf="editMode === 'view'"></app-view-item>
+      <app-new-item *ngIf="editMode === 'new'"></app-new-item>
+    </div>
+  </div>
+</div>
