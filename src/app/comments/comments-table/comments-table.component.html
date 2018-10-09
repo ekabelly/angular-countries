@@ -1,0 +1,30 @@
+<app-spinner *ngIf="!data"></app-spinner>
+<div *ngIf="data" style="padding:50px;" class="table-responsive">
+  <div class="form-horizontal col-md-8 col-md-offset-2" style="padding-bottom:50px;">
+      <div class="form-group">
+        <label for="filterStr">Filter Keyword:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterStr">
+      </div>
+      <div class="form-group">
+        <label for="filterField">Filter By:</label>
+        <select class="form-control" [(ngModel)]="filterField">
+            <option *ngFor="let field of fields">{{ field }}</option>
+        </select>
+      </div>
+    </div>
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th>PostId</th>
+      <th>Id</th>
+      <th>Email</th>
+      <th>Body</th>
+    </tr>
+    <!-- <app-table-row *ngFor="let row of comments; let i = index" [comment]='row' [id]='i+1'></app-table-row> -->
+    <tr *ngFor="let comment of comments | filter: filterStr: filterField">
+      <td>{{ comment.postId }}</td>
+      <td>{{ comment.id }} </td>
+      <td>{{ comment.email }} </td>
+      <td>{{ comment.body }} </td>
+    </tr>
+  </table>
+</div>

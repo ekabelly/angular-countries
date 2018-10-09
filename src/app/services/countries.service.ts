@@ -29,6 +29,14 @@ currentCountry;
      return {...this.countries[id]};
    }
 
+   fetchCountryByName(name: string){
+    return this.http.get('https://restcountries.eu/rest/v2/name/' + name)
+    .map((country)=>{
+      this.currentCountry = country;
+      return this.currentCountry;
+    });
+   }
+
    patchCountry(id: number, country){
      this.countries[id] = country;
    }
