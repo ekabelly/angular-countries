@@ -8,6 +8,7 @@ import { CountriesService } from '../../services/countries.service';
 })
 export class ItemListComponent implements OnInit {
   data;
+  currentPage: number = 1;
 
   constructor(private countriesService: CountriesService) { }
 
@@ -18,5 +19,11 @@ export class ItemListComponent implements OnInit {
   fetchCountries(){
     this.countriesService.fetchCountries().subscribe((data)=>
       this.data = data);
+  }
+
+  changePage(e){
+    if(e.location === 'country-list'){
+      this.currentPage = e.page;
+    }
   }
 }

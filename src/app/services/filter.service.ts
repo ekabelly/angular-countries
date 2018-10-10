@@ -1,18 +1,18 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Comment } from '../../models/comment.model';
+import { Injectable } from '@angular/core';
+import { Comment } from '../models/comment.model';
 
-@Pipe({
-  name: 'filter'
+@Injectable({
+  providedIn: 'root'
 })
-export class FilterPipe implements PipeTransform {
+export class FilterService {
+
+  constructor() { }
 
   transform(value: Comment[], filterStr: string, propName: string): any[] {
     if(value.length === 0 || filterStr === '') return value;
-    
     return [...value].filter((item, i)=>{
        if(typeof item[propName] === 'number') item[propName] += '';
-      return item[propName].toLowerCase().indexOf(filterStr) !== -1;
+      return item[propName].toLowerCase().indexOf(filterStr.toLowerCase()) !== -1;
     });
   }
-
 }

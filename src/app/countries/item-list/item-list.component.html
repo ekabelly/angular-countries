@@ -1,3 +1,4 @@
-<div style="padding:20px;">
-  <app-item *ngFor="let item of data; let id = index" [data]="item" [id]="id"></app-item>
+<div *ngIf="data" style="padding:20px;">
+  <app-pagination [data]="data" location="country-list" [maxRows]="10" (changePage)="changePage($event)"></app-pagination>
+  <app-item *ngFor="let item of data | pagination: 10: currentPage; let id = index" [data]="item" [id]="(currentPage - 1) * 10 + id"></app-item>
 </div>

@@ -21,6 +21,9 @@ import { CommentsTableComponent } from './comments/comments-table/comments-table
 import { TableRowComponent } from './comments/comments-table/table-row/table-row.component';
 import { FilterPipe } from './services/pipes/filter.pipe';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationPipe } from './services/pipes/pagination.pipe';
+import { CommentsService } from './services/comments.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     CommentsTableComponent,
     TableRowComponent,
     FilterPipe,
-    SpinnerComponent
+    SpinnerComponent,
+    PaginationComponent,
+    PaginationPipe
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [CountriesService],
+  providers: [CountriesService, CommentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
