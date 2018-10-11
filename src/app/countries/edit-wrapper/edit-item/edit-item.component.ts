@@ -38,6 +38,7 @@ export class EditItemComponent implements OnInit {
   }
 
   onDelete(){
+    debugger;
     this.form.reset();
     this.countriesService.newForm.emit('new');
     this.countriesService.removeCountry(this.id);

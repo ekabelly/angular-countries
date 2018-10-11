@@ -1,0 +1,7 @@
+.container-fluid {
+    padding: 30px;
+}
+
+th {
+    white-space:nowrap;
+}

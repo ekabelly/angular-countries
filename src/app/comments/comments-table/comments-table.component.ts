@@ -18,6 +18,7 @@ export class CommentsTableComponent implements OnInit {
   filterField: string = 'email';
   maxRows: number = 10;
   currentPage: number = 1;
+  sort: { dir: string, field: string } = {dir: 'down', field: 'poastId'}
 
   constructor(private commentsService: CommentsService, private filterSetvice: FilterService) { }
 
@@ -40,4 +41,13 @@ export class CommentsTableComponent implements OnInit {
     }
   }
 
+  sortHTMLClasses(field: string){
+    return this.sort.dir === 'up' && this.sort.field === field ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down';
+  }
+
+  onSort(field: string){
+    this.sort = {dir: this.sort.dir === 'down' ? 'up' : 'down', field};
+    if(this.sort.dir === 'up') return this.filteredComments.sort((a,b) => (a[field] > b[field]) ? 1 : ((b[field] > a[field]) ? -1 : 0));
+    return this.filteredComments.sort((a, b) => (b[field] > a[field]) ? 1 : ((a[field] > b[field]) ? -1 : 0));
+  }
 }

@@ -1,37 +1,50 @@
 <app-spinner *ngIf="!data"></app-spinner>
-<div *ngIf="data" style="padding:50px;" class="table-responsive">
-  <div class="form-horizontal col-md-8 col-md-offset-2" style="padding-bottom:50px;">
-    <div class="form-group">
-      <label for="filterStr">Filter Keyword:</label>
-      <input id="filterStr" type="text" class="form-control" (keyup)="filter($event)">
-    </div>
-    <div class="form-group">
-      <label for="filterField">Filter By:</label>
-      <select id="filterField" class="form-control" [(ngModel)]="filterField">
-          <option *ngFor="let field of fields">{{ field }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-        <label for="maxRows">Max Rows Per Page:</label>
-        <input id="maxRows" type="number" class="form-control" min="1" [(ngModel)]="maxRows">
+<div class="container-fluid" *ngIf="data">
+  <div class="row">
+    <div class="table-responsive">
+      <div class="form-horizontal col-md-8 col-md-offset-2" style="padding-bottom:50px;">
+        <div class="form-group">
+          <label for="filterStr">Filter Keyword:</label>
+          <input id="filterStr" type="text" class="form-control" (keyup)="filter($event)">
+        </div>
+        <div class="form-group">
+          <label for="filterField">Filter By:</label>
+          <select id="filterField" class="form-control" [(ngModel)]="filterField">
+              <option *ngFor="let field of fields">{{ field }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="maxRows">Max Rows Per Page:</label>
+          <input id="maxRows" type="number" class="form-control" min="1" [(ngModel)]="maxRows">
+        </div>
       </div>
+    </div>
   </div>
-  <app-pagination [data]="filteredComments" [maxRows]="maxRows" [location]="'comments-table'" [maxRows]="maxRows" (changePage)="changePage($event)"></app-pagination>
-  <table class="table table-hover table-condensed">
-    <tr>
-      <th>PostId</th>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Body</th>
-    </tr>
-    <!-- <app-table-row *ngFor="let row of comments; let i = index" [comment]='row' [id]='i+1'></app-table-row> -->
-    <tr *ngFor="let comment of filteredComments | filter: filterStr: filterField | pagination: maxRows: currentPage">
-      <td>{{ comment.postId }}</td>
-      <td>{{ comment.id }} </td>
-      <td>{{ comment.name }}</td>
-      <td>{{ comment.email }} </td>
-      <td>{{ comment.body }} </td>
-    </tr>
-  </table>
+  <div class="row">
+    <app-pagination [data]="filteredComments" [maxRows]="maxRows" [location]="'comments-table'" [maxRows]="maxRows" (changePage)="changePage($event)"></app-pagination>
+  </div>
+  <div class="row">
+    <table class="table table-hover table-condensed">
+      <tr>
+        <th>PostId<span class="glyphicon "
+           [ngClass]="sortHTMLClasses('postId')" (click)="onSort('postId')"></span></th>
+        <th>Id<span class="glyphicon "
+          [ngClass]="sortHTMLClasses('id')" (click)="onSort('id')"></span></th>
+        <th> Name <span class="glyphicon "
+          [ngClass]="sortHTMLClasses('name')" (click)="onSort('name')"></span>
+        </th>
+        <th>Email<span class="glyphicon "
+          [ngClass]="sortHTMLClasses('email')" (click)="onSort('email')"></span></th>
+        <th>Body</th>
+      </tr>
+      <!-- <app-table-row *ngFor="let row of comments; let i = index" [comment]='row' [id]='i+1'></app-table-row> -->
+      <tr *ngFor="let comment of filteredComments | filter: filterStr: filterField | pagination: maxRows: currentPage">
+        <td>{{ comment.postId }}</td>
+        <td>{{ comment.id }} </td>
+        <td>{{ comment.name }}</td>
+        <td>{{ comment.email }} </td>
+        <td>{{ comment.body }} </td>
+      </tr>
+    </table>
+  </div>
 </div>
