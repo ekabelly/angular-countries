@@ -7,14 +7,26 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentsService {
+  // @ts-ignore
+  private comments: Comment[];
 
   constructor(private http: HttpClient) { }
 
-  fetchComments(){
-    return this.http.get('https://jsonplaceholder.typicode.com/comments')
+  fetchComments(): Observable<Comment[]> {
+    return this.comments ? this.commentObservable() : this.http.get('https://jsonplaceholder.typicode.com/comments')
     .map((data: Comment[]) => {
-      console.log(data);
+      console.log({data});
+      this.comments = data;
       return data;
+    });
+  }
+
+  commentObservable(): Observable<Comment[]> {
+    return new Observable(observer => {
+      observer.next(this.comments);
+      return {
+        unsubscribe() {}
+      };
     });
   }
 }

@@ -20,7 +20,7 @@ export class CommentsTableComponent implements OnInit {
   currentPage: number = 1;
   sort: { dir: string, field: string } = {dir: 'down', field: 'poastId'}
 
-  constructor(private commentsService: CommentsService, private filterSetvice: FilterService) { }
+  constructor(private commentsService: CommentsService, private filterService: FilterService) { }
 
   ngOnInit() {
     this.commentsService.fetchComments().subscribe((data) =>{
@@ -32,7 +32,7 @@ export class CommentsTableComponent implements OnInit {
   }
 
   filter(e){
-    this.filteredComments = this.filterSetvice.transform([...this.comments], e.target.value, this.filterField);
+    this.filteredComments = this.filterService.transform([...this.comments], e.target.value, this.filterField);
   }
 
   changePage(e){
